@@ -1,0 +1,73 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+out/
+
+### Java ###
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+### Spring Boot ###
+# Logs
+*.log
+logs/
+log/
+
+# Temporary files
+*.pid
+*.tmp
+
+### Maven ###
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper-downloader.jar
+
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### Python ###
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+.tox/
+.venv/
+venv/
+ENV/
+env/
+*.sqlite3
+
+### OS ###
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+### Others ###
+*.swp
+*.swo
+*.bak
+*.tmp
