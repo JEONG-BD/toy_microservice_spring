@@ -39,8 +39,8 @@ run_server:
 	@echo "Starting new container..."
 	docker run -d --name $(CONTAINER_NAME) \
 		--network $(NETWORK) -p $(PORT):$(PORT) \
-		-e SPRING_DATASOURCE_URL=jdbc:postgresql://$(DB_CONTAINER_NAME):5432/$(DB_NAME) \
-		-e SPRING_DATASOURCE_USERNAME=$(DB_USER) \
+		-e SPRING_DATASOURCE_URL="jdbc:mysql://$(DB_CONTAINER_NAME):3306/$(DB_NAME)?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true" \
+		  -e SPRING_DATASOURCE_USERNAME=$(DB_USER) \
 		-e SPRING_DATASOURCE_PASSWORD=$(DB_PASSWORD) \
 		-e SPRING_JPA_HIBERNATE_DDL_AUTO=update \
 		-e SPRING_SQL_INIT_MODE=always \
