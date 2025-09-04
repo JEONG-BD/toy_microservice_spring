@@ -1,4 +1,6 @@
+server:
+  port: 60001
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/product-service
+      uri: mongodb://product-service-db:27017/product-service
