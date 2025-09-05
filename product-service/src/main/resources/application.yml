@@ -1,6 +1,18 @@
 server:
   port: 60001
 spring:
+  application:
+    name: product-service 
+
   data:
     mongodb:
       uri: mongodb://product-service-db:27017/product-service
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

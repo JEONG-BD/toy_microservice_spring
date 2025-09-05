@@ -2,6 +2,9 @@ server:
   port: 60003
 
 spring:
+  application:
+    name: inventory-service
+  
   datasource:
     url: jdbc:mysql://inventory-service-db:3306/db?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: admin
@@ -15,3 +18,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
