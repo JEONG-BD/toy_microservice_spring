@@ -1,0 +1,5 @@
+FROM openjdk:21-jdk-slim
+VOLUME /tmp
+COPY target/service-discovery-1.0-SNAPSHOT.jar service-discovery.jar
+ENTRYPOINT ["java", "-jar", "service-discovery.jar"]
+# ENTRYPOINT ["sh", "-c", "java -Dserver.port=$SERVER_PORT -jar product-service.jar"]
