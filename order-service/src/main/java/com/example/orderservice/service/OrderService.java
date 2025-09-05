@@ -19,7 +19,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderCreateRequestDto orderDto) {
         Order order = new Order();
@@ -34,7 +34,7 @@ public class OrderService {
                 .toList();
 
         // call inventory-service
-        InventoryResponseDto[] inventoryResponseArray = webClient.get()
+        InventoryResponseDto[] inventoryResponseArray = webClientBuilder.build().get()
                 .uri("http://inventory-service:60003/api/inventory",
                         uriBuilder ->
                                 uriBuilder.queryParam("skuCode", skuCodes).build())
