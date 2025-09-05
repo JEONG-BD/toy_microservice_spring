@@ -1,5 +1,6 @@
 package com.example.orderservice.service;
 
+import com.example.orderservice.dto.InventoryResponseDto;
 import com.example.orderservice.dto.OrderCreateRequestDto;
 import com.example.orderservice.dto.OrderLineItemRequestDto;
 import com.example.orderservice.model.Order;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,15 +28,21 @@ public class OrderService {
                 .stream().map(this::mapToDto).toList();
 
         order.addOrderLineItems(orderLineItemsList);
+        List<String> skuCodes = order.getOrderLineItemsList()
+                .stream()
+                .map(OrderLineItems::getSkuCode)
+                .toList();
 
         // call inventory-service
-        Boolean result = webClient.get()
-                .uri("http://inventory-service:60003/api/inventory")
+        InventoryResponseDto[] inventoryResponseArray = webClient.get()
+                .uri("http://inventory-service:60003/api/inventory",
+                        uriBuilder ->
+                                uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
-                .bodyToMono(Boolean.class)
+                .bodyToMono(InventoryResponseDto[].class)
                 .block();
-
-        if (result){
+        boolean allProsuctsInStock = Arrays.stream(inventoryResponseArray).allMatch(InventoryResponseDto::isInStock);
+        if (allProsuctsInStock){
             orderRepository.save(order);
         } else {
             throw new IllegalArgumentException("Product is not in stock please try again later");

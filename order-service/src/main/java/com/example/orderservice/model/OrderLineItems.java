@@ -2,6 +2,7 @@ package com.example.orderservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "t_order_line_items")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class OrderLineItems {
 
     @Id
