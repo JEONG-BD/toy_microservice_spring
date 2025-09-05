@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/inventory")
 @RequiredArgsConstructor
 @Tag(name="inventory", description = "Api for inventory management")
+@Slf4j
 public class InventoryController {
 
     private final InventoryService inventoryService;
 
-    @GetMapping("/{sku-code}")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "in stock")
-    public List<InventoryResponseDto> isInStock(List<String> skuCode){
-
+    public List<InventoryResponseDto> isInStock(@RequestParam  List<String> skuCode){
+        log.info("request");
         return inventoryService.isInStock(skuCode);
-
-
     }
 }
