@@ -3,7 +3,7 @@
 # =====================================
 IMAGE_NAME=inventory-service
 CONTAINER_NAME=inventory-service
-PORT=60002
+PORT=60003
 DB_IMAGE_NAME=mysql:8.0
 DB_CONTAINER_NAME=inventory-service-db
 DB_PORT=5003

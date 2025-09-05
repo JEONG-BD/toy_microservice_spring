@@ -29,7 +29,7 @@ public class OrderService {
 
         // call inventory-service
         Boolean result = webClient.get()
-                .uri("http://inventory-service:6002/api/inventory")
+                .uri("http://inventory-service:60003/api/inventory")
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
